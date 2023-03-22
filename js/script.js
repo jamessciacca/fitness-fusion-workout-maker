@@ -13,6 +13,8 @@
 //         console.error('Error: ', jqXHR.responseText);
 //     }
 // });
+
+
 var beginner = $('#beginner');
 var intermediate = $('#intermediate');
 var expert = $('#expert');
@@ -44,6 +46,7 @@ function setExperienceLevel(){
     var btn = $(this)
     workoutOptions.exerciseLevel = btn.text()
     console.log(workoutOptions)
+    
 }
 
 function setExerciseType(){
@@ -59,11 +62,13 @@ function setMuscleGroup(){
 }
 
 function createCustomWorkout(){
+    var url = `https://api.api-ninjas.com/v1/exercises?type=${workoutOptions.exerciseType.toLocaleLowerCase()}&muscle=${workoutOptions.muscleGroup.toLocaleLowerCase()}&difficulty=${workoutOptions.exerciseLevel.toLocaleLowerCase()}`;
+    console.log(url)
     // var finalSelection = workoutOptions;
      $.get({
             method: 'GET',
-            url: 'https://api.api-ninjas.com/v1/exercises?type='+workoutOptions.exerciseType +'&muscle='+workoutOptions.muscleGroup+'&difficulty='+workoutOptions.exerciseLevel,
-            headers: { 'X-Api-Key': 'ZoZlBMSehdv8K6lUg3Pvmg==o8eYcP8CIamhm8po'},
+            url: url,
+            headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z'},
             contentType: 'application/json',
             success: function (result) {
                 console.log(result);
