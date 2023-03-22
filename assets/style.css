@@ -1,13 +1,19 @@
-html, body{
+html,
+body {
     /* make body 100% of the window */
     height: 100%;
 }
 
-body{
+body {
     background-color: #5892c2;
 }
 
 * button {
+    background-color: #ffbcdc;
+    border-color: black;
+}
+
+.active {
     background-color: #ffbcdc;
     border-color: black;
 }
@@ -17,10 +23,10 @@ body{
     transition: 2;
 }
 
-#welcome-screen{
+#welcome-screen {
     max-width: 50%;
 }
 
-.hide{
+.hide {
     display: none;
 }
