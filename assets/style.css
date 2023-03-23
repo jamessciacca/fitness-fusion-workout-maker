@@ -30,3 +30,8 @@ body {
 .hide {
     display: none;
 }
+
+#get-started {
+    position: relative;
+    top: -75px;
+}
