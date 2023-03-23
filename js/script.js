@@ -80,6 +80,7 @@ function createCustomWorkout() {
     });
 }
 
+<<<<<<< HEAD
 functionCreateQuote(){
 
     var category = 'happiness'
@@ -99,9 +100,18 @@ functionCreateQuote(){
     }
 
 difficultyButtons.click(setExperienceLevel)
+=======
+difficultyButtons.click(setExperienceLevel, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
+>>>>>>> bff02ccbd341ece66430edfe31886415022a8c71
 
-exerciseButtons.click(setExerciseType)
+exerciseButtons.click(setExerciseType, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
-muscleInputs.change(setMuscleGroup)
+muscleInputs.change(setMuscleGroup, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
 createWorkout.click(createCustomWorkout)
