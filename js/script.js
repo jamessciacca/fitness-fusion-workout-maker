@@ -1,20 +1,3 @@
-// var muscle = 'biceps'
-// var type = 'strength'
-// var difficulty = 'beginner'
-// $.get({
-//     method: 'GET',
-//     url: 'https://api.api-ninjas.com/v1/exercises?type=' + type + '&muscle' + muscle + '&difficulty=' + difficulty,
-//     headers: { 'X-Api-Key': 'ZoZlBMSehdv8K6lUg3Pvmg==o8eYcP8CIamhm8po'},
-//     contentType: 'application/json',
-//     success: function (result) {
-//         console.log(result);
-//     },
-//     error: function ajaxError(jqXHR) {
-//         console.error('Error: ', jqXHR.responseText);
-//     }
-// });
-
-
 var beginner = $('#beginner');
 var intermediate = $('#intermediate');
 var expert = $('#expert');
@@ -108,15 +91,7 @@ function createQuote(){
     contentType: 'application/json',
     success: function(result) {
         console.log(result);
-        for (let i = 0; i < result.length; i++){
-            var html = `
-                <div class='workout p-5'>
-                    <h3 class='font-bold'>${result[i].quote}</h3>
-                    <p>${result[i].author}</p>
-                </div>
-            `;
-            displayWorkout.append(html)
-        }
+        
     },
     error: function ajaxError(jqXHR) {
         console.error('Error: ', jqXHR.responseText);
