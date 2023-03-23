@@ -26,13 +26,17 @@ var exerciseButtons = $('#question-two button')
 var getStarted = $('#get-started');
 var createWorkout = $('#create-workout')
 var muscleInputs = $('#question-three input')
+var displayWorkout = $('#display-workout')
 var workoutOptions = {
     exerciseLevel: '',
     exerciseType: '',
     muscleGroup: '',
 }
 
-
+function showFinalPage(){
+    $('#questions-page').hide();
+    $('#final-page').removeClass('hide');
+}
 
 function showQuestionPage() {
     $('#welcome-screen').hide();
@@ -40,6 +44,7 @@ function showQuestionPage() {
 }
 // we created a jQuery function to hide the welcome page and display the questions page
 getStarted.click(showQuestionPage);
+createWorkout.click(showFinalPage);
 
 
 
@@ -70,16 +75,45 @@ function createCustomWorkout() {
     $.get({
         method: 'GET',
         url: url,
-        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z' },
+        headers: { 'X-Api-Key': 'ZoZlBMSehdv8K6lUg3Pvmg==o8eYcP8CIamhm8po' },
         contentType: 'application/json',
         success: function (result) {
             console.log(result);
+            for (let i = 0; i < result.length; i++){
+                var html = `
+                    <div class='workout p-5'>
+                        <h3 class='font-bold'>${result[i].name}</h3>
+                        <p>${result[i].instructions}</p>
+                    </div>
+                `;
+                displayWorkout.append(html)
+            }
+            // $('#display-workout').text(JSON.stringify(result,null,2))
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
         }
     });
 }
+
+function createQuote(){
+
+    var category = 'inspirational'
+    
+    $.get({
+    method: 'GET',
+    url: 'https://api.api-ninjas.com/v1/quotes?category=' + category,
+        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z'},
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+    }
+});
+}
+
 
 difficultyButtons.click(setExperienceLevel, function () {
     $(this).addClass('active').siblings().removeClass('active')
@@ -94,3 +128,4 @@ muscleInputs.change(setMuscleGroup, function () {
 })
 
 createWorkout.click(createCustomWorkout)
+createWorkout.click(createQuote)

@@ -1,36 +1,28 @@
-html,
 body {
     /* make body 100% of the window */
     height: 100%;
 }
-
 body {
-    background-color: #5892c2;
+    background-color: #5892C2;
 }
-
 * button {
-    background-color: #ffbcdc;
+    background-color: #FFBCDC;
     border-color: black;
 }
-
 .active {
-    background-color: #ffbcdc;
+    background-color: #FFBCDC;
     border-color: black;
 }
-
 * button:hover {
-    background-color: #ffa4d0;
+    background-color: #FFA4D0;
     transition: 2;
 }
-
 #welcome-screen {
     max-width: 50%;
 }
-
 .hide {
     display: none;
 }
-
 #get-started {
     position: relative;
     top: -75px;
