@@ -41,6 +41,8 @@ function showQuestionPage() {
 // we created a jQuery function to hide the welcome page and display the questions page
 getStarted.click(showQuestionPage);
 
+
+
 // muscle group 
 function setExperienceLevel() {
     var btn = $(this)
