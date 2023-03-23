@@ -108,7 +108,15 @@ function createQuote(){
     contentType: 'application/json',
     success: function(result) {
         console.log(result);
-        
+        for (let i = 0; i < result.length; i++){
+            var html = `
+                <div class='workout p-5'>
+                    <h3 class='font-bold'>${result[i].quote}</h3>
+                    <p>${result[i].author}</p>
+                </div>
+            `;
+            displayWorkout.append(html)
+        }
     },
     error: function ajaxError(jqXHR) {
         console.error('Error: ', jqXHR.responseText);
