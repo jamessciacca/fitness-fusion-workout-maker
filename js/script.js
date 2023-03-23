@@ -27,6 +27,7 @@ var getStarted = $('#get-started');
 var createWorkout = $('#create-workout')
 var muscleInputs = $('#question-three input')
 var displayWorkout = $('#display-workout')
+var displayQuote = $('#display-quote')
 var workoutOptions = {
     exerciseLevel: '',
     exerciseType: '',
@@ -107,6 +108,7 @@ function createQuote(){
     contentType: 'application/json',
     success: function(result) {
         console.log(result);
+        
     },
     error: function ajaxError(jqXHR) {
         console.error('Error: ', jqXHR.responseText);
