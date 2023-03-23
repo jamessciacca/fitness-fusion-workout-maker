@@ -26,6 +26,7 @@ var exerciseButtons = $('#question-two button')
 var getStarted = $('#get-started');
 var createWorkout = $('#create-workout')
 var muscleInputs = $('#question-three input')
+var displayWorkout = $('#display-workout')
 var workoutOptions = {
     exerciseLevel: '',
     exerciseType: '',
@@ -74,16 +75,19 @@ function createCustomWorkout() {
     $.get({
         method: 'GET',
         url: url,
-        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z' },
+        headers: { 'X-Api-Key': 'ZoZlBMSehdv8K6lUg3Pvmg==o8eYcP8CIamhm8po' },
         contentType: 'application/json',
         success: function (result) {
             console.log(result);
-            var html = ``;
             for (let i = 0; i < result.length; i++){
-                html += `<p>Name: ${result[i].name}, Instructions: ${result[i].instructions}</p>`
+                var html = `
+                    <div class='workout p-5'>
+                        <h3 class='font-bold'>${result[i].name}</h3>
+                        <p>${result[i].instructions}</p>
+                    </div>
+                `;
+                displayWorkout.append(html)
             }
-            
-            $('#display-workout').html(html)
             // $('#display-workout').text(JSON.stringify(result,null,2))
         },
         error: function ajaxError(jqXHR) {
