@@ -80,10 +80,9 @@ function createCustomWorkout() {
     });
 }
 
-<<<<<<< HEAD
-functionCreateQuote(){
+function CreateQuote(){
 
-    var category = 'happiness'
+    var category = 'success'
     
     $.ajax({
         method: 'GET',
@@ -99,12 +98,10 @@ functionCreateQuote(){
     });
     }
 
-difficultyButtons.click(setExperienceLevel)
-=======
+
 difficultyButtons.click(setExperienceLevel, function () {
     $(this).addClass('active').siblings().removeClass('active')
 })
->>>>>>> bff02ccbd341ece66430edfe31886415022a8c71
 
 exerciseButtons.click(setExerciseType, function () {
     $(this).addClass('active').siblings().removeClass('active')
