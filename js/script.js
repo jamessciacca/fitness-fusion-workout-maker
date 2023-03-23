@@ -62,6 +62,7 @@ function setMuscleGroup() {
 }
 
 function createCustomWorkout() {
+    // this is where we hide question elements page and show workout page
     var url = `https://api.api-ninjas.com/v1/exercises?type=${workoutOptions.exerciseType.toLocaleLowerCase()}&muscle=${workoutOptions.muscleGroup.toLocaleLowerCase()}&difficulty=${workoutOptions.exerciseLevel.toLocaleLowerCase()}`;
     console.log(url)
     // var finalSelection = workoutOptions;
@@ -78,6 +79,24 @@ function createCustomWorkout() {
         }
     });
 }
+
+functionCreateQuote(){
+
+    var category = 'happiness'
+    
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/quotes?category=' + category,
+        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z'},
+        contentType: 'application/json',
+        success: function(result) {
+            console.log(result);
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
+    }
 
 difficultyButtons.click(setExperienceLevel)
 
