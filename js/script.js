@@ -79,10 +79,16 @@ function createCustomWorkout() {
     });
 }
 
-difficultyButtons.click(setExperienceLevel)
+difficultyButtons.click(setExperienceLevel, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
-exerciseButtons.click(setExerciseType)
+exerciseButtons.click(setExerciseType, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
-muscleInputs.change(setMuscleGroup)
+muscleInputs.change(setMuscleGroup, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
 createWorkout.click(createCustomWorkout)
