@@ -34,57 +34,63 @@ var workoutOptions = {
 
 
 
-function showQuestionPage(){
+function showQuestionPage() {
     $('#welcome-screen').hide();
     $('#questions-page').removeClass('hide');
 }
-   // we created a jQuery function to hide the welcome page and display the questions page
+// we created a jQuery function to hide the welcome page and display the questions page
 getStarted.click(showQuestionPage);
 
 
 
 // muscle group 
-function setExperienceLevel(){
+function setExperienceLevel() {
     var btn = $(this)
     workoutOptions.exerciseLevel = btn.text()
     console.log(workoutOptions)
-    
+
 }
 
-function setExerciseType(){
+function setExerciseType() {
     var btn = $(this)
     workoutOptions.exerciseType = btn.text()
     console.log(workoutOptions)
 }
 
-function setMuscleGroup(){
+function setMuscleGroup() {
     var input = $(this)
     workoutOptions.muscleGroup = input.val()
     console.log(workoutOptions)
 }
 
-function createCustomWorkout(){
+function createCustomWorkout() {
     var url = `https://api.api-ninjas.com/v1/exercises?type=${workoutOptions.exerciseType.toLocaleLowerCase()}&muscle=${workoutOptions.muscleGroup.toLocaleLowerCase()}&difficulty=${workoutOptions.exerciseLevel.toLocaleLowerCase()}`;
     console.log(url)
     // var finalSelection = workoutOptions;
-     $.get({
-            method: 'GET',
-            url: url,
-            headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z'},
-            contentType: 'application/json',
-            success: function (result) {
-                console.log(result);
-            },
-            error: function ajaxError(jqXHR) {
-                console.error('Error: ', jqXHR.responseText);
-            }
-        });
+    $.get({
+        method: 'GET',
+        url: url,
+        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z' },
+        contentType: 'application/json',
+        success: function (result) {
+            console.log(result);
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
 }
 
-difficultyButtons.click(setExperienceLevel)
+difficultyButtons.click(setExperienceLevel, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
-exerciseButtons.click(setExerciseType)
+exerciseButtons.click(setExerciseType, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
-muscleInputs.change(setMuscleGroup)
+muscleInputs.change(setMuscleGroup, function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
 
 createWorkout.click(createCustomWorkout)
