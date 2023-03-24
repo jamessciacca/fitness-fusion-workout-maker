@@ -1,16 +1,23 @@
 var beginner = $('#beginner');
 var intermediate = $('#intermediate');
 var expert = $('#expert');
-var cardio = $("#cardio");
-var stretching = $('#stretching');
-var strengthTraining = $('#strengthTraining');
-var difficultyButtons = $('#question-one button')
-var exerciseButtons = $('#question-two button')
+var powerlifting = $("#powerlifting");
+var plyometrics = $('#plyometrics');
+var strengthTraining = $('#strength-training');
+var difficultyButtons = $('#question-one button');
+var exerciseButtons = $('#question-two button');
+var muscleButtons = $('#question-three button');
+var chest = $('#chest');
+var lats = $('#lats');
+var quadriceps = $('#quadriceps');
+var hamstring = $('#hamstring');
+var bicep = $('#bicep');
+var tricep = $('#tricep');
 var getStarted = $('#get-started');
-var createWorkout = $('#create-workout')
-var muscleInputs = $('#question-three input')
-var displayWorkout = $('#display-workout')
-var displayQuote = $('#display-quote')
+var createWorkout = $('#create-workout');
+var displayWorkout = $('#display-workout');
+var displayQuote = $('#display-quote');
+var logoBtn = $('#logo-btn');
 var workoutOptions = {
     exerciseLevel: '',
     exerciseType: '',
@@ -24,13 +31,20 @@ function showFinalPage(){
 
 function showQuestionPage() {
     $('#welcome-screen').hide();
-    $('#questions-page').removeClass('hide');
+    $('#questions-page').show();
+    $('#logo').show();
+}
+
+function showWelcomePage(){
+    $('#welcome-screen').show();
+    $('#questions-page').hide();
+    $('#final-page').hide();
+    $('#logo').hide();
 }
 // we created a jQuery function to hide the welcome page and display the questions page
 getStarted.click(showQuestionPage);
 createWorkout.click(showFinalPage);
-
-
+logoBtn.click(showWelcomePage);
 
 // muscle group 
 function setExperienceLevel() {
@@ -47,37 +61,9 @@ function setExerciseType() {
 }
 
 function setMuscleGroup() {
-    var input = $(this)
-    workoutOptions.muscleGroup = input.val()
+    var btn = $(this)
+    workoutOptions.muscleGroup = btn.text()
     console.log(workoutOptions)
-}
-
-function createCustomWorkout() {
-    var url = `https://api.api-ninjas.com/v1/exercises?type=${workoutOptions.exerciseType.toLocaleLowerCase()}&muscle=${workoutOptions.muscleGroup.toLocaleLowerCase()}&difficulty=${workoutOptions.exerciseLevel.toLocaleLowerCase()}`;
-    console.log(url)
-    // var finalSelection = workoutOptions;
-    $.get({
-        method: 'GET',
-        url: url,
-        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z' },
-        contentType: 'application/json',
-        success: function (result) {
-            console.log(result);
-            for (let i = 0; i < result.length; i++){
-                var html = `
-                    <div class='workout p-5'>
-                        <h3 class='font-bold'>${result[i].name}</h3>
-                        <p>${result[i].instructions}</p>
-                    </div>
-                `;
-                displayWorkout.append(html)
-            }
-            // $('#display-workout').text(JSON.stringify(result,null,2))
-        },
-        error: function ajaxError(jqXHR) {
-            console.error('Error: ', jqXHR.responseText);
-        }
-    });
 }
 
 function createQuote(){
@@ -94,10 +80,10 @@ function createQuote(){
         for (let i = 0; i < result.length; i++){
             var html = `
                 <div class='inspo-quote  p-5'>
-                    <h3 class='font-bold'>${result[i].quote}</h3>
+                    <h3 class='font-bold'>Quote of the Day - ${result[i].quote} By - ${result[i].author}</h3>
                 </div>
             `;
-            displayWorkout.append(html)
+            displayQuote.append(html)
         }
         
     },
@@ -107,17 +93,52 @@ function createQuote(){
 });
 }
 
+function createCustomWorkout() {
+    var url = `https://api.api-ninjas.com/v1/exercises?type=${workoutOptions.exerciseType.toLocaleLowerCase()}&muscle=${workoutOptions.muscleGroup.toLocaleLowerCase()}&difficulty=${workoutOptions.exerciseLevel.toLocaleLowerCase()}`;
+    console.log(url)
+    // var finalSelection = workoutOptions;
+    $.get({
+        method: 'GET',
+        url: url,
+        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z' },
+        contentType: 'application/json',
+        success: function (result) {
+            console.log(result);
+            for (let i = 0; i < result.length; i++){
+                var html = `
+                    <div class='workout p-5'>
+                        <hr>
+                        <h1 class='font-bold text-fuchsia-900'>${result[i].name}</h1>
+                        <p>${result[i].instructions}</p>
+                    </div>
+                `;
+                displayWorkout.append(html)
+            }
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
+}
 
-difficultyButtons.click(setExperienceLevel, function () {
+
+difficultyButtons.click(function () {
     $(this).addClass('active').siblings().removeClass('active')
+    workoutOptions.exerciseLevel = $(this).text()
+    console.log(workoutOptions.exerciseLevel)
 })
 
-exerciseButtons.click(setExerciseType, function () {
+exerciseButtons.click(function () {
     $(this).addClass('active').siblings().removeClass('active')
-})
+    workoutOptions.exerciseType = $(this).text()
+    console.log(workoutOptions.exerciseType)
 
-muscleInputs.change(setMuscleGroup, function () {
+})
+muscleButtons.click(function () {
     $(this).addClass('active').siblings().removeClass('active')
+    workoutOptions.muscleGroup = $(this).text()
+    console.log(workoutOptions.muscleGroup)
+
 })
 
 createWorkout.click(createCustomWorkout)
