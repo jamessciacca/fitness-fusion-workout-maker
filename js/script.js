@@ -126,7 +126,37 @@ function createCustomWorkout() {
 }
 
 
+
 difficultyButtons.click(function () {
+
+    var category = 'inspirational'
+    
+    $.get({
+    method: 'GET',
+    url: 'https://api.api-ninjas.com/v1/quotes?category=' + category,
+        headers: { 'X-Api-Key': 'LYC7Sv/C6QGfB6EJhceMfw==m5c9bJZNY9gDM22Z'},
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+        for (let i = 0; i < result.length; i++){
+            var html = `
+                <div class='inspo-quote  p-5'>
+                    <h3 class='font-bold'>${result[i].quote}</h3>
+                </div>
+            `;
+            displayWorkout.append(html)
+        }
+        
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+    }
+});
+}
+
+
+difficultyButtons.click(setExperienceLevel, function () {
+
     $(this).addClass('active').siblings().removeClass('active')
     workoutOptions.exerciseLevel = $(this).text()
     console.log(workoutOptions.exerciseLevel)
