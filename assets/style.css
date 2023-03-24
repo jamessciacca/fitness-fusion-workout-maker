@@ -27,3 +27,21 @@ body {
     position: relative;
     top: -75px;
 }
+
+#logo a{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+
+#logo img{
+    
+    width: 25%;
+    height: 25%;
+}
+
+#create-workout{
+    background-color: rgb(55, 168, 55);
+}
